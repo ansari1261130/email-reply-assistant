@@ -5,7 +5,7 @@ COPY . .
 RUN mvn clean package -DskipTests
 
 # Stage 2: Run the JAR
-FROM openjdk:24-jdk
+FROM openjdk:21-jdk
 COPY --from=build /app/target/*.jar /email-reply-assistant.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "/email-reply-assistant.jar"]
