@@ -1,11 +1,17 @@
-version: "3.8"
+version: '3.8'
 
 services:
-  email-generator:
-    build: .
-    container_name: email-generator-app
+  backend:
+    image: openjdk:21-jdk
+    container_name: springboot-app
+    working_dir: /app
+    volumes:
+      - .:/app
     ports:
       - "8080:8080"
+    command: ["sh", "-c", "./mvnw spring-boot:run"]
+    environment:
+      - GEMINI_KEY=${GEMINI_KEY}
+      - GEMINI_URL=${GEMINI_URL}
     env_file:
       - .env
-    restart: unless-stopped
